@@ -27,10 +27,10 @@ router.get('/:id',(req , res) =>{
     })
 })
 router.post('/',(req , res) =>{
-    const newProduct = Product(req.body)
+    const newProduct = new Product(req.body)
     newProduct.save((error)=>{
         if (error){
-            res.status(500).json({messsage : "server Side Provlem"})
+            res.status(500).json({ error: "Server Side Error" })
         }
         else{
             res.status(200).send({message: "Product Added Successful"})
