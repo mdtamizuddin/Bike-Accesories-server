@@ -70,4 +70,5 @@ router.delete('/:id', verifyJWT, (req, res) => {
         }
     })
 })
+
 module.exports = router
