@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const userSchemas = mongoose.Schema({
     email: {
         type: String,
-        unique: true,
         required: true,
+        unique: true
     },
     role: {
         type: String,

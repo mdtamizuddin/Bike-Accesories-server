@@ -28,3 +28,4 @@ const productSchema = mongoose.Schema({
 })
 
 module.exports = productSchema
+

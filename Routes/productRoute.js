@@ -37,6 +37,26 @@ router.post('/',(req , res) =>{
         }
     })
 })
+router.put('/:id', (req , res) =>{
+    const newProduct = req.body
+    const id = req.params.id
+    const quantity = newProduct.quantity
+    console.log(quantity)
+    const price = newProduct.price
+     Product.updateOne({'_id': id} , {
+        $set:{
+            quantity : quantity,
+            price: price
+        }
+    },(error , result)=>{
+        if (error){
+            res.status(500).json({ error: "Server Side Error" })
+        }
+        else{
+            res.status(200).send({message: "Product Updated Successful" , result})
+        }
+    })
+})
 router.delete('/:id', (req , res)=>{
     const id = req.params.id
     Product.deleteOne({ '_id': id }, (err) => {

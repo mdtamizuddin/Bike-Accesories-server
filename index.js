@@ -1,6 +1,7 @@
 
 const express = require('express')
 const mongoose = require('mongoose')
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const cors = require('cors')
@@ -21,6 +22,7 @@ mongoose.connect(uri , {
 
 app.use('/users' , require('./Routes/usersRouter'))
 app.use('/product' , require('./Routes/productRoute'))
+app.use('/order' , require('./Routes/orderRouter'))
 
 
 app.listen(PORT, () => {
