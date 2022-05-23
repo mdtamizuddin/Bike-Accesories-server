@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const orderSchema = require('../Schemas/orderSchema')
-
+const verifyJWT = require('../verifyJWT')
 const Order = new mongoose.model('UsersOrder', orderSchema)
 
 router.get('/', (req, res) => {
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
         }
     })
 })
-router.post('/add', async (req, res) => {
+router.post('/add',verifyJWT, async (req, res) => {
     const newOrder = new Order(req.body)
     newOrder.save((error)=>{
         if (error){
@@ -38,7 +38,7 @@ router.post('/add', async (req, res) => {
     })
 
 })
-router.delete('/:id', (req, res) => {
+router.delete('/:id',verifyJWT, (req, res) => {
     const id = req.params.id
     Order.deleteOne({ '_id': id }, (err) => {
         if (err) {

@@ -23,6 +23,7 @@ mongoose.connect(uri , {
 app.use('/users' , require('./Routes/usersRouter'))
 app.use('/product' , require('./Routes/productRoute'))
 app.use('/order' , require('./Routes/orderRouter'))
+app.use('/review' , require('./Routes/reviewsRouter'))
 
 
 app.listen(PORT, () => {

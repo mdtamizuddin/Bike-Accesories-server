@@ -1,14 +1,17 @@
+const  jwt  = require("jsonwebtoken");
+
 function verifyJWT(req, res, next) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    const token = req.headers.auth;
+    if (!token) {
         return res.status(401).send({ message: 'UnAuthorized access' });
     }
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, decoded) {
+
+    jwt.verify(token, process.env.ACCESS_TOKEN, function (err, decoded) {
         if (err) {
             return res.status(403).send({ message: 'Forbidden access' })
         }
-        req.decoded = decoded;
+        req.decoded = decoded.email;
         next();
     });
 }
+module.exports = verifyJWT
