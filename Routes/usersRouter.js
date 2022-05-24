@@ -30,9 +30,7 @@ router.get('/:email', verifyJWT, (req, res) => {
 })
 router.put('/:email', async (req, res) => {
     const email = req.params.email
-    console.log(email)
     const newUser = new User(req.body)
-    console.log(newUser)
     User.findOne({ email: email }, (err, data) => {
         if (data) {
             const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN)
