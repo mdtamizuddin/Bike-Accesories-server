@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const sendEmail = require('../nodeMailer')
 const orderSchema = require('../Schemas/orderSchema')
 const verifyJWT = require('../verifyJWT')
 const Order = new mongoose.model('UsersOrder', orderSchema)
@@ -15,9 +16,9 @@ router.get('/', (req, res) => {
         }
     })
 })
-router.get('/:id', (req, res) => {
-    const id = req.params.id
-    Order.findOne({ '_id': id }, (error, result) => {
+router.get('/:email', (req, res) => {
+    const email = req.params.email
+    Order.find({ email: email }, (error, result) => {
         if (error) {
             res.status(501).send({ message: "server side Error" })
         }
@@ -39,8 +40,9 @@ router.post('/add', verifyJWT, async (req, res) => {
 
 })
 router.put('/:id', (req, res) => {
-    const newStatus = req.body.position
-    const paymentInfo = req.body.payment
+    const bodyData = req.body
+    const newStatus = bodyData.position
+    const paymentInfo = bodyData.payment
     Order.updateOne({'_id' : req.params.id},{
         $set: {
             position: newStatus,
@@ -51,6 +53,7 @@ router.put('/:id', (req, res) => {
             res.status(500).json({ error: "Server Side Error" })
         }
         else {
+            sendEmail({order: bodyData.order , paymentInfo})
             res.status(200).send({ message: "Order Status Added Successful" })
         }
     })
