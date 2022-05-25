@@ -68,8 +68,7 @@ router.put('/shipped/:id',verifyJWT, (req, res) => {
             res.status(500).json({ error: "Server Side Error" })
         }
         else {
-            sendEmail({order: bodyData.order , paymentInfo})
-            res.status(200).send({ message: "Order Status Added Successful" })
+            res.status(200).send({ message: "Order Status Changed Successful" })
         }
     })
 })
