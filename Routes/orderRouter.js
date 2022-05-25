@@ -58,6 +58,22 @@ router.put('/:id',verifyJWT, (req, res) => {
         }
     })
 })
+router.put('/shipped/:id',verifyJWT, (req, res) => {
+    Order.updateOne({'_id' : req.params.id},{
+        $set: {
+            position: "shipped"
+        }
+    },(err)=> {
+        if (err) {
+            res.status(500).json({ error: "Server Side Error" })
+        }
+        else {
+            sendEmail({order: bodyData.order , paymentInfo})
+            res.status(200).send({ message: "Order Status Added Successful" })
+        }
+    })
+})
+
 router.delete('/:id', verifyJWT, (req, res) => {
     const id = req.params.id
     Order.deleteOne({ '_id': id }, (err) => {
