@@ -18,7 +18,7 @@ const sendEmail = ({paymentInfo, order}) => {
             text: "Some text ",
             html: `
             <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                    <h4 style="color: rgb(0, 1, 65);">Hello Sender ${order.email}</h4>
+                    <h4 style="color: rgb(0, 1, 65);">Hello ${order.email}</h4>
                     <p>Thank your Purses Successfully Done</p>
                     <p>TransactionId : <span >${paymentInfo.transactionId}</span></p>
                     <p>Orderd Product Name : <span >${order.name}</span></p>
