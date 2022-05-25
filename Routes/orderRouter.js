@@ -6,7 +6,7 @@ const orderSchema = require('../Schemas/orderSchema')
 const verifyJWT = require('../verifyJWT')
 const Order = new mongoose.model('UsersOrder', orderSchema)
 
-router.get('/', (req, res) => {
+router.get('/',verifyJWT, (req, res) => {
     Order.find({}, (error, result) => {
         if (error) {
             res.status(501).send({ message: "server side Error" })
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         }
     })
 })
-router.get('/:email', (req, res) => {
+router.get('/:email',verifyJWT, (req, res) => {
     const email = req.params.email
     Order.find({ email: email }, (error, result) => {
         if (error) {
@@ -39,7 +39,7 @@ router.post('/add', verifyJWT, async (req, res) => {
     })
 
 })
-router.put('/:id', (req, res) => {
+router.put('/:id',verifyJWT, (req, res) => {
     const bodyData = req.body
     const newStatus = bodyData.position
     const paymentInfo = bodyData.payment
