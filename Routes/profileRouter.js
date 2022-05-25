@@ -6,7 +6,7 @@ const Profile = new mongoose.model('Profile', profileSchema)
 
 const verifyJWT = require('../verifyJWT')
 
-router.get('/', (req, res) => {
+router.get('/', verifyJWT, (req, res) => {
     Profile.find({}, (error, result) => {
         if (error) {
             res.status(501).send({ message: "server side Error" })
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         }
     })
 })
-router.get('/:email', (req, res) => {
+router.get('/:email', verifyJWT, (req, res) => {
     Profile.findOne({ email: req.params.email }, (error, result) => {
         if (error) {
             res.status(501).send({ message: "server side Error" })
@@ -35,12 +35,12 @@ router.put('/:email', (req, res) => {
                 $set: {
                     others: req.body.others
                 }
-            },(err)=>{
+            }, (err) => {
                 if (err) {
-                    res.status(500).send({message : "There Is A Problem"})
+                    res.status(500).send({ message: "There Is A Problem" })
                 }
-                else{
-                    res.status(200).send({message : "Data Updated"})
+                else {
+                    res.status(200).send({ message: "Data Updated" })
                 }
             })
         }

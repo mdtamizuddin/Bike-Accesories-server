@@ -26,19 +26,36 @@ router.get('/:id', (req, res) => {
         }
     })
 })
-router.post('/add',verifyJWT, async (req, res) => {
+router.post('/add', verifyJWT, async (req, res) => {
     const newOrder = new Order(req.body)
-    newOrder.save((error)=>{
-        if (error){
+    newOrder.save((error) => {
+        if (error) {
             res.status(500).json({ error: "Server Side Error" })
         }
-        else{
-            res.status(200).send({message: "Product Added Successful"})
+        else {
+            res.status(200).send({ message: "Product Added Successful" })
         }
     })
 
 })
-router.delete('/:id',verifyJWT, (req, res) => {
+router.put('/:id', (req, res) => {
+    const newStatus = req.body.position
+    const paymentInfo = req.body.payment
+    Order.updateOne({'_id' : req.params.id},{
+        $set: {
+            position: newStatus,
+            paymentInfo: paymentInfo
+        }
+    },(err)=> {
+        if (err) {
+            res.status(500).json({ error: "Server Side Error" })
+        }
+        else {
+            res.status(200).send({ message: "Order Status Added Successful" })
+        }
+    })
+})
+router.delete('/:id', verifyJWT, (req, res) => {
     const id = req.params.id
     Order.deleteOne({ '_id': id }, (err) => {
         if (err) {

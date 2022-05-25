@@ -33,6 +33,9 @@ const orderSchema = new mongoose.Schema({
         type: String,
         default : "submitted"
     },
+    paymentInfo:{
+        type: Object
+    },
     date : {
         type : Date,
         default : Date.now,

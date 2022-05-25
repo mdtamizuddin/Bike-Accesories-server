@@ -25,6 +25,7 @@ app.use('/product' , require('./Routes/productRoute'))
 app.use('/order' , require('./Routes/orderRouter'))
 app.use('/review' , require('./Routes/reviewsRouter'))
 app.use('/profile' , require('./Routes/profileRouter'))
+app.use('/payment' , require('./Routes/paymentRouter'))
 
 
 app.listen(PORT, () => {

@@ -43,7 +43,6 @@ router.put('/:id', verifyJWT, (req, res) => {
     const newProduct = req.body
     const id = req.params.id
     const quantity = newProduct.quantity
-    console.log(quantity)
     const price = newProduct.price
     Product.updateOne({ '_id': id }, {
         $set: {
