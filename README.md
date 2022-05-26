@@ -7,15 +7,15 @@
 - ### Express
 - ### Mongoose
 - ### Body-parser
-- ### nodemailer
-- ### stripe
+- ### Nodemailer
+- ### Stripe
 - ### Cors
 
 ## Available Scripts
 
 In the project directory, you can run:
 ### For Development
-    npm StartDev
+    npm startDev
 
 ### For Deployment
-    npm Start
+    npm start
