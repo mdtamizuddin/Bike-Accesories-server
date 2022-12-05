@@ -18,7 +18,10 @@ mongoose.connect(uri , {
 })
     .then(() => console.log('Database Is Connected'))
     .catch((err)=> console.log(err))
-
+app.get('/', (req, res) => {
+    res.send({ status : "Server Is Running } )
+}
+)
 
 app.use('/users' , require('./Routes/usersRouter'))
 app.use('/product' , require('./Routes/productRoute'))
